@@ -1,103 +1,69 @@
-◇  Systemd ───────────────────────────────────────────────────────────────────────────────╮
-│                                                                                         │
-│  Systemd user services are unavailable. Skipping lingering checks and service install.  │
-│                                                                                         │
-├─────────────────────────────────────────────────────────────────────────────────────────╯
+# 🤖 OpenClaw Assistant
 
-│
+This guide will help you get up and running using Docker Compose.
 
-◇
-Health check failed: gateway closed (1006 abnormal closure (no close frame)): no close reason
-  Gateway target: ws://127.0.0.1:18789
-  Source: local loopback
-  Config: /home/node/.openclaw/openclaw.json
-  Bind: loopback
-│
-◇  Health check help ────────────────────────────────╮
-│                                                    │
-│  Docs:                                             │
-│  https://docs.openclaw.ai/gateway/health           │
-│  https://docs.openclaw.ai/gateway/troubleshooting  │
-│                                                    │
-├────────────────────────────────────────────────────╯
-│
-◇  Optional apps ────────────────────────╮
-│                                        │
-│  Add nodes for extra features:         │
-│  - macOS app (system + notifications)  │
-│  - iOS app (camera/canvas)             │
-│  - Android app (camera/canvas)         │
-│                                        │
-├────────────────────────────────────────╯
-│
-◇  Control UI ───────────────────────────────────────────────────────────────────────────────╮
-│                                                                                            │
-│  Web UI: http://127.0.0.1:18789/                                                           │
-│  Web UI (with token):                                                                      │
-│  http://127.0.0.1:18789/#token=cc7160576a8a0314ffcf0ab38ccafb2ca287ccfadb01f206            │
-│  Gateway WS: ws://127.0.0.1:18789                                                          │
-│  Gateway: not detected (gateway closed (1006 abnormal closure (no close frame)): no close  │
-│  reason)                                                                                   │
-│  Docs: https://docs.openclaw.ai/web/control-ui                                             │
-│                                                                                            │
-├────────────────────────────────────────────────────────────────────────────────────────────╯
-│
-◇  Workspace backup ────────────────────────────────────────╮
-│                                                           │
-│  Back up your agent workspace.                            │
-│  Docs: https://docs.openclaw.ai/concepts/agent-workspace  │
-│                                                           │
-├───────────────────────────────────────────────────────────╯
-│
-◇  Security ──────────────────────────────────────────────────────╮
-│                                                                 │
-│  Running agents on your computer is risky — harden your setup:  │
-│  https://docs.openclaw.ai/security                              │
-│                                                                 │
-├─────────────────────────────────────────────────────────────────╯
-│
-◇  Shell completion ───────────────────────────────────────────────────────╮
-│                                                                          │
-│  Shell completion installed. Restart your shell or run: source ~/.zshrc  │
-│                                                                          │
-├──────────────────────────────────────────────────────────────────────────╯
-│
-◇  Dashboard ready ────────────────────────────────────────────────────────────────╮
-│                                                                                  │
-│  Dashboard link (with token):                                                    │
-│  http://127.0.0.1:18789/#token=cc7160576a8a0314ffcf0ab38ccafb2ca287ccfadb01f206  │
-│  Copy/paste this URL in a browser on this machine to control OpenClaw.           │
-│  No GUI detected. Open from your computer:                                       │
-│  ssh -N -L 18789:127.0.0.1:18789 user@<host>                                     │
-│  Then open:                                                                      │
-│  http://localhost:18789/                                                         │
-│  http://localhost:18789/#token=cc7160576a8a0314ffcf0ab38ccafb2ca287ccfadb01f206  │
-│  Docs:                                                                           │
-│  https://docs.openclaw.ai/gateway/remote                                         │
-│  https://docs.openclaw.ai/web/control-ui                                         │
-│                                                                                  │
-├──────────────────────────────────────────────────────────────────────────────────╯
-│
-◇  Web search (optional) ─────────────────────────────────────────────────────────────────╮
-│                                                                                         │
-│  If you want your agent to be able to search the web, you’ll need an API key.           │
-│                                                                                         │
-│  OpenClaw uses Brave Search for the `web_search` tool. Without a Brave Search API key,  │
-│  web search won’t work.                                                                 │
-│                                                                                         │
-│  Set it up interactively:                                                               │
-│  - Run: openclaw configure --section web                                                │
-│  - Enable web_search and paste your Brave Search API key                                │
-│                                                                                         │
-│  Alternative: set BRAVE_API_KEY in the Gateway environment (no config changes).         │
-│  Docs: https://docs.openclaw.ai/tools/web                                               │
-│                                                                                         │
-├─────────────────────────────────────────────────────────────────────────────────────────╯
-│
-◇  What now ─────────────────────────────────────────────────────────────╮
-│                                                                        │
-│  What now: https://openclaw.ai/showcase ("What People Are Building").  │
-│                                                                        │
-├────────────────────────────────────────────────────────────────────────╯
-│
-└  Onboarding complete. Use the dashboard link above to control OpenClaw.
+OpenClaw is a powerful automation and agent framework. This repository contains the configuration and workspace for running your own OpenClaw instance.
+
+## 🚀 Quick Start
+
+Follow these steps to set up the project on your local machine.
+
+### 1. Prerequisites
+
+Ensure you have the following installed:
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+
+### 2. Configuration
+
+OpenClaw requires a few tokens to function.
+
+1.  **Copy the environment template:**
+    ```bash
+    cp .env.example .env
+    ```
+2.  **Edit the `.env` file:**
+    - `OPENCLAW_GATEWAY_TOKEN`: Create a secure random string (e.g., using `openssl rand -hex 24`).
+    - `DISCORD_BOT_TOKEN`: Your Discord bot token from the [Discord Developer Portal](https://discord.com/developers/applications).
+    - `OPENCLAW_CONFIG_DIR`: Path to your config folder (default: `./openclaw-config`).
+    - `OPENCLAW_WORKSPACE_DIR`: Path to your workspace folder (default: `./openclaw-workspace`).
+
+### 3. Run the Application
+
+Start the containers in detached mode:
+
+```bash
+docker-compose up -d
+```
+
+## 🌐 Accessing the UI
+
+Once the containers are running, you can access the OpenClaw Control UI:
+
+- **Web UI:** [http://localhost:18789](http://localhost:18789)
+- **Token access:** If you need to authenticate, use the token you set in `.env`.
+
+## 🛠️ CLI Usage
+
+You can interact with the OpenClaw CLI container for administrative tasks:
+
+```bash
+docker-compose run openclaw-cli help
+```
+
+## 📋 Common Commands
+
+| Command | Description |
+| :--- | :--- |
+| `docker-compose logs -f` | View real-time logs |
+| `docker-compose restart` | Restart the services |
+| `docker-compose down` | Stop and remove containers |
+| `docker-compose pull` | Update to the latest images |
+
+## 🔍 Troubleshooting
+
+- **Containers won't start:** Check the logs using `docker-compose logs`.
+- **Port conflicts:** If port `18789` is already in use, change the mapping in `docker-compose.yml`.
+- **Permission issues:** Ensure the volumes directories (`openclaw-config`, `openclaw-workspace`) have the correct permissions for Docker.
+
+---
+*For more detailed information, visit the [official OpenClaw documentation](https://docs.openclaw.ai).*
