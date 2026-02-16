@@ -4,6 +4,9 @@ This guide will help you get up and running using Docker Compose.
 
 OpenClaw is a powerful automation and agent framework. This repository contains the configuration and workspace for running your own OpenClaw instance.
 
+or 
+[Run Model locally](https://dev.to/sienna/qwen3-coder-next-the-complete-2026-guide-to-running-powerful-ai-coding-agents-locally-1k95)
+
 ## 🚀 Quick Start
 
 Follow these steps to set up the project on your local machine.
